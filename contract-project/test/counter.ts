@@ -13,7 +13,7 @@ describe("Counter", () => {
   const provider = waffle.provider;
 
   // 2
-  let [wallet] = getWallets(provider);
+  let [wallet] = provider.getWallets();
 
   // 3
   let counter: Counter;
