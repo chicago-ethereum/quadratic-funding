@@ -1,4 +1,4 @@
-from eth-utils import is_hex, to_hex
+from eth_utils import is_hex, to_hex
 
 '''
     Helper function that enforces that funder addresses are in hex format.

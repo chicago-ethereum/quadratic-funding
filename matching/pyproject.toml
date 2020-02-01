@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "quadratic-funding"
+name = "clr-matching"
 version = "0.1.0"
 description = "A CLR matching script for the Chicago Ethereum Meetup"
 authors = ["Spencer Graham <sl.graha@gmail.com>"]
