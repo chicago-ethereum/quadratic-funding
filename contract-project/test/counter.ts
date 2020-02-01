@@ -1,19 +1,19 @@
-import {waffle} from "@nomiclabs/buidler";
+import { waffle } from "@nomiclabs/buidler";
 import chai from "chai";
-import {deployContract, getWallets, solidity} from "ethereum-waffle";
+import { deployContract, getWallets, solidity } from "ethereum-waffle";
 
 import CounterArtifact from "../artifacts/Counter.json";
-import {Counter} from "../typechain/Counter";
+import { Counter } from "../typechain/Counter";
 
 chai.use(solidity);
-const {expect} = chai;
+const { expect } = chai;
 
 describe("Counter", () => {
   // 1
   const provider = waffle.provider;
 
   // 2
-  let [wallet] = getWallets(provider);
+  let [wallet] = provider.getWallets();
 
   // 3
   let counter: Counter;

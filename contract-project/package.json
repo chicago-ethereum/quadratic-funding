@@ -50,5 +50,8 @@
     "typechain": "^1.0.4",
     "typechain-target-ethers": "^1.0.3",
     "typescript": "^3.7.5"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^2.4.0"
   }
 }
