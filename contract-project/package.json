@@ -1,0 +1,54 @@
+{
+  "name": "chicago-ethereum-qf-contracts",
+  "version": "0.0.1",
+  "description": "Solidity code for the Chicago Ethereum Meetup's quadratic funding / CLR pilot",
+  "main": "index.ts",
+  "scripts": {
+    "build": "npm run compile && npm run typechain",
+    "compile": "npx buidler compile",
+    "typechain": "npx buidler compile && typechain --outDir typechain --target ethers 'artifacts/*.json'",
+    "test": "npx buidler test",
+    "lint:fix": "prettier --write 'src/**/*.{js,ts}' 'test/**/*.{js,ts}' '**/*.sol'",
+    "lint:solidity": "npx buidler check"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chicago-ethereum/quadratic-funding.git"
+  },
+  "keywords": [
+    "qf",
+    "clr",
+    "quadratic",
+    "funding",
+    "constrained",
+    "liberal",
+    "radicalism",
+    "gitcoin",
+    "grants"
+  ],
+  "author": "Paul Cowgill",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chicago-ethereum/quadratic-funding/issues"
+  },
+  "homepage": "https://github.com/chicago-ethereum/quadratic-funding#readme",
+  "devDependencies": {
+    "@nomiclabs/buidler": "^1.1.2",
+    "@nomiclabs/buidler-ethers": "^1.1.2",
+    "@nomiclabs/buidler-etherscan": "^1.1.2",
+    "@nomiclabs/buidler-solhint": "^1.1.2",
+    "@nomiclabs/buidler-waffle": "^1.1.2-rc.0",
+    "@types/chai": "^4.2.8",
+    "@types/mocha": "^7.0.1",
+    "@types/node": "^13.7.0",
+    "chai": "^4.2.0",
+    "ethereum-waffle": "^2.3.1",
+    "ethers": "^4.0.44",
+    "prettier": "^1.19.1",
+    "prettier-plugin-solidity": "^1.0.0-alpha.37",
+    "ts-node": "^8.6.2",
+    "typechain": "^1.0.4",
+    "typechain-target-ethers": "^1.0.3",
+    "typescript": "^3.7.5"
+  }
+}
