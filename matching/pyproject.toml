@@ -9,6 +9,7 @@ python = "^3.8.1"
 ipykernel = "^5.1.4"
 seaborn = "^0.10.0"
 pandas = "^1.0.0"
+eth-utils = "^1.8.4"
 
 [tool.poetry.dev-dependencies]
 

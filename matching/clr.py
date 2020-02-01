@@ -1,17 +1,51 @@
+from eth-utils import is_hex, to_hex
+
+'''
+    Helper function that enforces that funder addresses are in hex format.
+
+    Args:
+        [funders] (str)
+
+    Returns:
+        [funders] (str)
+'''
+def check_addresses(funders):
+    result = []
+    for f in funders:
+        if not is_hex(f):
+            to_hex(f)
+        result.append(f)
+    return result
+
+'''
+    Helper function that converts raw erc20 contributions to floats
+
+    Args:
+        [contributions] (int)
+
+    Returns:
+        [contributions] (float)
+'''
+def to_chiDAI(contributions):
+    chiDAI_contribs = [i / 10**18 for i in contributions]
+    return chiDAI_contribs
+
 '''
     Helper function that merges raw lists of grant information into a list
     of tuples.
 
     Args:
-        [recipients] (int)
-        [funders] (int)
-        [contributions] (float)
+        [recipients] (str)
+        [funders] (str)
+        [contributions] (int)
 
     Returns:
-        [ ( recipient (int), funder (int), contribution (float) ) ]
+        [ ( recipient (str), funder (str), contribution (float) ) ]
 '''
-def join_raw_data(recipients, funders, contributions):
-    return list(zip(recipients, funders, contributions))
+def process_raw_data(recipients, funders, contributions):
+    hex_recipients = check_addresses(recipients)
+    chiDAI_contribs = to_chiDAI(contributions)
+    return list(zip(hex_recipients, funders, chiDAI_contribs))
 
 '''
     Helper function that aggregates contributions from the same funder
@@ -95,7 +129,7 @@ def constrain_by_budget(matches, budget):
         clr: { 'recipient' (int): lr_grant (float) }
 '''
 def clr(recipients, funders, contribution_amounts, budget):
-    raw_grants = join_raw_data(recipients, funders, contribution_amounts)
+    raw_grants = process_raw_data(recipients, funders, contribution_amounts)
     grants = aggregate(raw_grants)
     recipient_grant_sums = recipient_grant_sum(grants)
     lr_matches = calc_lr_matches(grants)
