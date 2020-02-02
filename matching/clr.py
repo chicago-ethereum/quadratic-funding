@@ -43,9 +43,9 @@ def to_chiDAI(contributions):
         [ ( recipient (str), funder (str), contribution (float) ) ]
 '''
 def process_raw_data(recipients, funders, contributions):
-    hex_recipients = check_addresses(recipients)
+    hex_funders = check_addresses(funders)
     chiDAI_contribs = to_chiDAI(contributions)
-    return list(zip(hex_recipients, funders, chiDAI_contribs))
+    return list(zip(recipients, hex_funders, chiDAI_contribs))
 
 '''
     Helper function that aggregates contributions from the same funder
