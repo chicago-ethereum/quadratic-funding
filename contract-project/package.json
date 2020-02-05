@@ -41,6 +41,7 @@
         "@nomiclabs/buidler-etherscan": "^1.1.2",
         "@nomiclabs/buidler-solhint": "^1.1.2",
         "@nomiclabs/buidler-waffle": "^1.1.2-rc.0",
+        "@openzeppelin/contracts": "^2.5.0",
         "@types/chai": "^4.2.8",
         "@types/mocha": "^7.0.1",
         "@types/node": "^13.7.0",
@@ -57,7 +58,5 @@
         "typechain-target-ethers": "^1.0.3",
         "typescript": "^3.7.5"
     },
-    "dependencies": {
-        "@openzeppelin/contracts": "^2.4.0"
-    }
+    "dependencies": {}
 }
