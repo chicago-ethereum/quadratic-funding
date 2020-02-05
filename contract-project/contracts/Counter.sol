@@ -3,7 +3,7 @@ pragma solidity ^0.5.15;
 
 
 contract Counter {
-    uint256 count = 0;
+    uint256 private count = 0;
 
     event CountedTo(uint256 number);
 

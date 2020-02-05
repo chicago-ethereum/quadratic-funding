@@ -4,6 +4,7 @@ pragma solidity ^0.5.15;
 
 import "@openzeppelin/contracts/ownership/Ownable.sol";
 import "@nomiclabs/buidler/console.sol";
+import "./CEM.sol";
 
 
 contract Contributions is Ownable {
@@ -53,10 +54,8 @@ contract Contributions is Ownable {
             _approvedRecipients[recipient] == true,
             "Recipient must be approved"
         );
-        uint256 nextIndex = _senderAddresses[recipient].length;
-        // TODO: Potentially use getter for sender addresses
-        _senderAddresses[recipient][nextIndex] = sender;
-        _contributionAmounts[recipient][nextIndex] = amount;
+        _senderAddresses[recipient].push(sender);
+        _contributionAmounts[recipient].push(amount);
         // Transfer the token as an internal tx if ERC20 approved
         return true;
     }
