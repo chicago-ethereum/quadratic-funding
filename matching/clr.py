@@ -52,10 +52,10 @@ def process_raw_data(recipients, funders, contributions):
     to a given recipient.
 
     Args:
-        grants: [ ( recipient (int), funder (int), contribution (float) ) ]
+        grants: [ ( recipient (str), funder (int), contribution (float) ) ]
 
     Returns:
-        { 'recipient' (int): { 'funder' (int): agg_contribution (float) } }
+        { 'recipient' (str): { 'funder' (int): agg_contribution (float) } }
 '''
 def aggregate(grants):
     aggregated = {}
@@ -69,10 +69,10 @@ def aggregate(grants):
     Helper function that sums individual contributions to each recipient.
 
     Args:
-        grants: { 'recipient' (int): { 'funder' (int): contribution (float) } }
+        grants: { 'recipient' (str): { 'funder' (int): contribution (float) } }
 
     Returns:
-        { 'recipient' (int): sum_contribution (float) }
+        { 'recipient' (str): sum_contribution (float) }
 
 '''
 def recipient_grant_sum(grants):
@@ -83,10 +83,10 @@ def recipient_grant_sum(grants):
     for each recipient.
 
     Args:
-        grants: { 'recipient' (int): { 'funder' (int): contribution (float) } }
+        grants: { 'recipient' (str): { 'funder' (int): contribution (float) } }
 
     Returns:
-        { 'recipient' (int): lr_grant (float) }
+        { 'recipient' (str): lr_grant (float) }
 
 '''
 def calc_lr_matches(grants):
@@ -102,11 +102,11 @@ def calc_lr_matches(grants):
     total matching budget.
 
     Args:
-        { 'recipient' (int): lr_grant (float) }
+        { 'recipient' (str): lr_grant (float) }
         budget (float)
 
     Returns:
-        { 'recipient' (int): lr_grant (float) }
+        { 'recipient' (str): lr_grant (float) }
 '''
 def constrain_by_budget(matches, budget):
     raw_total = sum(matches.values())
@@ -124,9 +124,9 @@ def constrain_by_budget(matches, budget):
         budget: (float)
 
     Returns:
-        grants: { 'recipient' (int): { 'funder' (int): agg_contribution (float) } }
-        recipient_grant_sums:  { 'recipient' (int): sum_contribution (float) }
-        clr: { 'recipient' (int): lr_grant (float) }
+        grants: { 'recipient' (str): { 'funder' (int): agg_contribution (float) } }
+        lr_matches:  { 'recipient' (str): lr_match (float) }
+        clr: { 'recipient' (str): clr_match(float) }
 '''
 def clr(recipients, funders, contribution_amounts, budget):
     raw_grants = process_raw_data(recipients, funders, contribution_amounts)
@@ -135,4 +135,4 @@ def clr(recipients, funders, contribution_amounts, budget):
     lr_matches = calc_lr_matches(grants)
     clr = constrain_by_budget(lr_matches, budget)
 
-    return grants, recipient_grant_sums, clr
+    return grants, lr_matches, clr
