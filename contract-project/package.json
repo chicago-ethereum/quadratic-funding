@@ -10,7 +10,9 @@
         "test": "npx buidler test",
         "lint:prettier": "prettier --write 'src/**/*.{js,ts}' 'test/**/*.{js,ts}' 'contracts/**/*.sol'",
         "lint:solhint": "npx buidler check",
-        "lint": "npm run lint:prettier && npm run lint:solhint"
+        "lint": "npm run lint:prettier && npm run lint:solhint",
+        "deploy:rinkeby": "npx buidler run --network rinkeby scripts/deploy.ts",
+        "verify:rinkeby": "npx buidler verify-contract --contract-name Contributions --address 0x11528D3E35C9C8Fe59358c390f088Cf4b66e4C9e"
     },
     "repository": {
         "type": "git",
@@ -43,6 +45,7 @@
         "@types/mocha": "^7.0.1",
         "@types/node": "^13.7.0",
         "chai": "^4.2.0",
+        "dotenv-flow": "^3.1.0",
         "ethereum-waffle": "^2.3.1",
         "ethers": "^4.0.44",
         "husky": "^4.2.1",
