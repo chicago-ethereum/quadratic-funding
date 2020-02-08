@@ -140,11 +140,7 @@ contract EthChicagoQF is Ownable {
         address project,
         uint256 tokenAmount
     ) internal {
-        // TODO: Debug this next
-        //          Error: VM Exception while processing transaction: revert SafeERC20: low-level call failed
-        //   at EthChicagoQF.callOptionalReturn (@openzeppelin/contracts/token/ERC20/SafeERC20.sol:68)
-        //   at EthChicagoQF.safeTransferFrom (@openzeppelin/contracts/token/ERC20/SafeERC20.sol:25)
-        //   at EthChicagoQF._deliverTokens (contracts/EthChicagoQF.sol:146)
+        // TODO: Potentially move back to safeTransferFrom at some point
         // token().safeTransferFrom(backer, project, tokenAmount);
         token().transferFrom(backer, project, tokenAmount);
     }

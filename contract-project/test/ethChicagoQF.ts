@@ -10,7 +10,7 @@ import {CEMToken} from "../typechain/CEMToken";
 chai.use(solidity);
 const {expect} = chai;
 
-describe.only("EthChicagoQF contract", () => {
+describe("EthChicagoQF contract", () => {
     const provider = waffle.provider;
 
     let [
@@ -34,7 +34,6 @@ describe.only("EthChicagoQF contract", () => {
 
     let cemTokenContract: CEMToken;
     let cemTokenContractAsBacker: CEMToken;
-    let cemTokenContractAsApprovedSpender: CEMToken;
 
     // TODO: Use an address type rather than the more generic string
     let contributionsAddress: string;
@@ -67,10 +66,6 @@ describe.only("EthChicagoQF contract", () => {
         // always a "meetup attendee"
         cemTokenContractAsBacker = cemTokenContract.connect(backerWalletObject);
 
-        cemTokenContractAsApprovedSpender = cemTokenContract.connect(
-            approvedWalletObject
-        );
-
         const {address: cemTokenContractAddress} = cemTokenContract;
         console.log({cemTokenContractAddress});
 
@@ -94,34 +89,6 @@ describe.only("EthChicagoQF contract", () => {
         console.log({backerBalance});
     });
 
-    it("should be able to spend approved CEMToken", async () => {
-        const amount = 10;
-
-        // Just using this to test balance error
-        // Sender approves other wallet to test transferFrom directly
-
-        await expect(
-            cemTokenContractAsBacker.approve(approvedWalletAddress, amount)
-        )
-            .to.emit(cemTokenContractAsBacker, "Approval")
-            .withArgs(backerAddress, approvedWalletAddress, amount);
-
-        const approvedWalletAllowance = await cemTokenContractAsBacker.allowance(
-            backerAddress,
-            approvedWalletAddress
-        );
-        console.log({approvedWalletAllowance});
-        expect(approvedWalletAllowance).to.equal(amount);
-
-        console.log("About to do the transfer");
-        // Owner is backer
-        await cemTokenContractAsApprovedSpender.transferFrom(
-            backerAddress,
-            projectAddress,
-            amount
-        );
-    });
-
     // Note: Real unit tests should be smaller than this
     // and the shared parts should move into a beforeEach hook
     // Just wrote this literally as quickly as possible
@@ -136,10 +103,10 @@ describe.only("EthChicagoQF contract", () => {
         console.log(`Added project ${projectAddress}`);
 
         // Reading public data, backer doesn't matter because it isn't a tx
-        let contributorAddresses = await ethChicagoQFContract.listContributors(
+        let backerAddresses = await ethChicagoQFContract.listContributors(
             nickname
         );
-        expect(contributorAddresses.length).to.eq(0);
+        expect(backerAddresses.length).to.eq(0);
 
         // Sender approves contract
         await cemTokenContractAsBacker.approve(contributionsAddress, amount);
@@ -166,10 +133,8 @@ describe.only("EthChicagoQF contract", () => {
             `${backerAddress} contributed ${amount} tokens to ${nickname}`
         );
 
-        contributorAddresses = await ethChicagoQFContract.listContributors(
-            nickname
-        );
-        console.log({contributorAddresses});
+        backerAddresses = await ethChicagoQFContract.listContributors(nickname);
+        console.log({backerAddresses});
         const contributedAmounts = await ethChicagoQFContract.listAmounts(
             nickname
         );
@@ -179,7 +144,7 @@ describe.only("EthChicagoQF contract", () => {
             nickname
         );
 
-        expect(contributorAddresses.length).to.eq(currentNumberOfContributions);
+        expect(backerAddresses.length).to.eq(currentNumberOfContributions);
         expect(contributedAmounts.length).to.eq(currentNumberOfContributions);
         expect(contributionCount).to.eq(currentNumberOfContributions);
         console.log(
@@ -187,11 +152,11 @@ describe.only("EthChicagoQF contract", () => {
         );
 
         const firstIndex = 0;
-        const firstContributorAddress = await ethChicagoQFContract.getContributorAtIndex(
+        const firstBackerAddress = await ethChicagoQFContract.getContributorAtIndex(
             nickname,
             firstIndex
         );
-        expect(firstContributorAddress).to.eq(backerAddress);
+        expect(firstBackerAddress).to.eq(backerAddress);
         const firstContributedAmount = await ethChicagoQFContract.getAmountAtIndex(
             nickname,
             firstIndex
