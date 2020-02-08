@@ -10,23 +10,23 @@ import "@openzeppelin/contracts/token/ERC20/SafeERC20.sol";
 import "@openzeppelin/contracts/math/SafeMath.sol";
 
 
-contract Contributions is Ownable {
+contract EthChicagoQF is Ownable {
     using SafeMath for uint256;
     using SafeERC20 for IERC20;
 
     // ERC20 basic token contract being held
     IERC20 private _token;
 
-    mapping(address => address[]) private _senderAddresses;
+    mapping(address => address[]) private _backerAddresses;
     mapping(address => uint256[]) private _contributionAmounts;
 
-    mapping(address => bool) private _approvedRecipients;
+    mapping(address => bool) private _approvedProjects;
 
     mapping(string => address) private _nicknames;
 
     // struct Contribution {
-    //   address sender;
-    //   address recipient;
+    //   address backer;
+    //   address project;
     //   uint256 amount;
     // }
 
@@ -41,52 +41,49 @@ contract Contributions is Ownable {
         return _token;
     }
 
-    function getRecipientAddress(string memory nickname)
+    function getProjectAddress(string memory nickname)
         public
         view
-        returns (address recipient)
+        returns (address project)
     {
         return _nicknames[nickname];
     }
 
-    function addRecipient(address recipient, string memory nickname)
+    function addProject(address project, string memory nickname)
         public
         onlyOwner
     {
-        _approvedRecipients[recipient] = true;
-        _nicknames[nickname] = recipient;
+        _approvedProjects[project] = true;
+        _nicknames[nickname] = project;
     }
 
-    function removeRecipient(string memory nickname) public onlyOwner {
-        address recipient = getRecipientAddress(nickname);
-        _approvedRecipients[recipient] = false;
+    function removeProject(string memory nickname) public onlyOwner {
+        address project = getProjectAddress(nickname);
+        _approvedProjects[project] = false;
         delete _nicknames[nickname];
     }
 
     // TODO: Set up a way for a user to approve transfers of the
     // tokens using this contract
 
-    function contribute(address sender, string memory nickname, uint256 amount)
+    function contribute(address backer, string memory nickname, uint256 amount)
         public
         returns (bool)
     {
         console.log("contribute called in Solidity");
         require(amount > 0, "Contribution amount must be greater than 0");
-        address recipient = getRecipientAddress(nickname);
-        require(
-            _approvedRecipients[recipient] == true,
-            "Recipient must be approved"
-        );
-        _senderAddresses[recipient].push(sender);
-        _contributionAmounts[recipient].push(amount);
+        address project = getProjectAddress(nickname);
+        require(_approvedProjects[project] == true, "Project must be approved");
+        _backerAddresses[project].push(backer);
+        _contributionAmounts[project].push(amount);
         // Transfer the token as an internal tx if ERC20 approved
-        _deliverTokens(sender, recipient, amount);
+        _deliverTokens(backer, project, amount);
         return true;
     }
 
     /**
      * @dev Gets the total count of individual contributions stored by the
-     * contract for a given recipient
+     * contract for a given project
      * @return uint256 representing the total amount of tokens
      */
     function getContributionCount(string memory nickname)
@@ -94,8 +91,8 @@ contract Contributions is Ownable {
         view
         returns (uint256)
     {
-        address recipient = getRecipientAddress(nickname);
-        return _contributionAmounts[recipient].length;
+        address project = getProjectAddress(nickname);
+        return _contributionAmounts[project].length;
     }
 
     // Single-value getters
@@ -103,10 +100,10 @@ contract Contributions is Ownable {
     function getContributorAtIndex(string memory nickname, uint256 index)
         public
         view
-        returns (address senderAddress)
+        returns (address backerAddress)
     {
-        address[] memory senderAddresses = listContributors(nickname);
-        return senderAddresses[index];
+        address[] memory backerAddresses = listContributors(nickname);
+        return backerAddresses[index];
     }
 
     function getAmountAtIndex(string memory nickname, uint256 index)
@@ -123,10 +120,10 @@ contract Contributions is Ownable {
     function listContributors(string memory nickname)
         public
         view
-        returns (address[] memory senderAddresses)
+        returns (address[] memory backerAddresses)
     {
-        address recipient = getRecipientAddress(nickname);
-        return _senderAddresses[recipient];
+        address project = getProjectAddress(nickname);
+        return _backerAddresses[project];
     }
 
     function listAmounts(string memory nickname)
@@ -134,21 +131,21 @@ contract Contributions is Ownable {
         view
         returns (uint256[] memory contributionAmounts)
     {
-        address recipient = getRecipientAddress(nickname);
-        return _contributionAmounts[recipient];
+        address project = getProjectAddress(nickname);
+        return _contributionAmounts[project];
     }
 
     function _deliverTokens(
-        address sender,
-        address recipient,
+        address backer,
+        address project,
         uint256 tokenAmount
     ) internal {
         // TODO: Debug this next
         //          Error: VM Exception while processing transaction: revert SafeERC20: low-level call failed
-        //   at Contributions.callOptionalReturn (@openzeppelin/contracts/token/ERC20/SafeERC20.sol:68)
-        //   at Contributions.safeTransferFrom (@openzeppelin/contracts/token/ERC20/SafeERC20.sol:25)
-        //   at Contributions._deliverTokens (contracts/Contributions.sol:146)
-        // token().safeTransferFrom(sender, recipient, tokenAmount);
-        token().transferFrom(sender, recipient, tokenAmount);
+        //   at EthChicagoQF.callOptionalReturn (@openzeppelin/contracts/token/ERC20/SafeERC20.sol:68)
+        //   at EthChicagoQF.safeTransferFrom (@openzeppelin/contracts/token/ERC20/SafeERC20.sol:25)
+        //   at EthChicagoQF._deliverTokens (contracts/EthChicagoQF.sol:146)
+        // token().safeTransferFrom(backer, project, tokenAmount);
+        token().transferFrom(backer, project, tokenAmount);
     }
 }
