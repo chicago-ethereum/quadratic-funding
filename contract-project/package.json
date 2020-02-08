@@ -40,15 +40,17 @@
         "@nomiclabs/buidler-ethers": "^1.1.2",
         "@nomiclabs/buidler-etherscan": "^1.1.2",
         "@nomiclabs/buidler-solhint": "^1.1.2",
-        "@nomiclabs/buidler-waffle": "^1.1.2-rc.0",
+        "@nomiclabs/buidler-waffle": "^1.1.2",
+        "@openzeppelin/contracts": "^2.5.0",
         "@types/chai": "^4.2.8",
         "@types/mocha": "^7.0.1",
         "@types/node": "^13.7.0",
         "chai": "^4.2.0",
         "dotenv-flow": "^3.1.0",
-        "ethereum-waffle": "^2.3.1",
+        "ethereum-waffle": "^2.3.2",
         "ethers": "^4.0.44",
         "husky": "^4.2.1",
+        "npm-check-updates": "^4.0.1",
         "prettier": "^1.19.1",
         "prettier-plugin-solidity": "^1.0.0-alpha.37",
         "solhint-plugin-prettier": "0.0.4",
@@ -57,7 +59,5 @@
         "typechain-target-ethers": "^1.0.3",
         "typescript": "^3.7.5"
     },
-    "dependencies": {
-        "@openzeppelin/contracts": "^2.4.0"
-    }
+    "dependencies": {}
 }
