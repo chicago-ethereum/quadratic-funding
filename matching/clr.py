@@ -1,17 +1,21 @@
 from eth_utils import is_hex, to_hex
 
+## TODO implement direct read from contract, using...
+##  - infura api
+##  - web3.py
+
 '''
-    Helper function that enforces that funder addresses are in hex format.
+    Helper function that enforces that backer addresses are in hex format.
 
     Args:
-        [funders] (str)
+        [backers] (str)
 
     Returns:
-        [funders] (str)
+        [backers] (str)
 '''
-def check_addresses(funders):
+def check_addresses(backers):
     result = []
-    for f in funders:
+    for f in backers:
         if not is_hex(f):
             to_hex(f)
         result.append(f)
@@ -35,66 +39,66 @@ def to_chiDAI(contributions):
     of tuples.
 
     Args:
-        [recipients] (str)
-        [funders] (str)
+        [projects] (str)
+        [backers] (str)
         [contributions] (int)
 
     Returns:
-        [ ( recipient (str), funder (str), contribution (float) ) ]
+        [ ( project (str), backer (str), contribution (float) ) ]
 '''
-def process_raw_data(recipients, funders, contributions):
-    hex_recipients = check_addresses(recipients)
+def process_raw_data(projects, backers, contributions):
+    hex_backers = check_addresses(backers)
     chiDAI_contribs = to_chiDAI(contributions)
-    return list(zip(hex_recipients, funders, chiDAI_contribs))
+    return list(zip(projects, hex_backers, chiDAI_contribs))
 
 '''
-    Helper function that aggregates contributions from the same funder
-    to a given recipient.
+    Helper function that aggregates contributions from the same backer
+    to a given project.
 
     Args:
-        grants: [ ( recipient (int), funder (int), contribution (float) ) ]
+        grants: [ ( project (str), backer (int), contribution (float) ) ]
 
     Returns:
-        { 'recipient' (int): { 'funder' (int): agg_contribution (float) } }
+        { 'project' (str): { 'backer' (int): agg_contribution (float) } }
 '''
 def aggregate(grants):
     aggregated = {}
-    for recipient, funder, contribution in grants:
-        if recipient not in aggregated:
-            aggregated[recipient] = {}
-        aggregated[recipient][funder] = aggregated[recipient].get(funder, 0) + contribution
+    for project, backer, contribution in grants:
+        if project not in aggregated:
+            aggregated[project] = {}
+        aggregated[project][backer] = aggregated[project].get(backer, 0) + contribution
     return aggregated
 
 '''
-    Helper function that sums individual contributions to each recipient.
+    Helper function that sums individual contributions to each project.
 
     Args:
-        grants: { 'recipient' (int): { 'funder' (int): contribution (float) } }
+        grants: { 'project' (str): { 'backer' (int): contribution (float) } }
 
     Returns:
-        { 'recipient' (int): sum_contribution (float) }
+        { 'project' (str): sum_contribution (float) }
 
 '''
-def recipient_grant_sum(grants):
+def project_grant_sum(grants):
     return {key:sum(value.values()) for key, value in grants.items()}
 
 '''
     Helper function that calculates the unconstrained liberal radical match
-    for each recipient.
+    for each project.
 
     Args:
-        grants: { 'recipient' (int): { 'funder' (int): contribution (float) } }
+        grants: { 'project' (str): { 'backer' (int): contribution (float) } }
 
     Returns:
-        { 'recipient' (int): lr_grant (float) }
+        { 'project' (str): lr_grant (float) }
 
 '''
 def calc_lr_matches(grants):
     matches = {}
-    for recipient in grants:
-        sum_sqrts = sum([i**(1/2) for i in grants[recipient].values()])
+    for project in grants:
+        sum_sqrts = sum([i**(1/2) for i in grants[project].values()])
         squared = sum_sqrts**2
-        matches[recipient] = squared
+        matches[project] = squared
     return matches
 
 '''
@@ -102,11 +106,11 @@ def calc_lr_matches(grants):
     total matching budget.
 
     Args:
-        { 'recipient' (int): lr_grant (float) }
+        { 'project' (str): lr_grant (float) }
         budget (float)
 
     Returns:
-        { 'recipient' (int): lr_grant (float) }
+        { 'project' (str): lr_grant (float) }
 '''
 def constrain_by_budget(matches, budget):
     raw_total = sum(matches.values())
@@ -118,21 +122,21 @@ def constrain_by_budget(matches, budget):
     helpful info.
 
     Args:
-        [recipients] (ints)
-        [funders] (ints)
+        [projects] (ints)
+        [backers] (ints)
         [contributions] (floats)
         budget: (float)
 
     Returns:
-        grants: { 'recipient' (int): { 'funder' (int): agg_contribution (float) } }
-        recipient_grant_sums:  { 'recipient' (int): sum_contribution (float) }
-        clr: { 'recipient' (int): lr_grant (float) }
+        grants: { 'project' (str): { 'backer' (int): agg_contribution (float) } }
+        lr_matches:  { 'project' (str): lr_match (float) }
+        clr: { 'project' (str): clr_match(float) }
 '''
-def clr(recipients, funders, contribution_amounts, budget):
-    raw_grants = process_raw_data(recipients, funders, contribution_amounts)
+def clr(projects, backers, contribution_amounts, budget):
+    raw_grants = process_raw_data(projects, backers, contribution_amounts)
     grants = aggregate(raw_grants)
-    recipient_grant_sums = recipient_grant_sum(grants)
+    project_grant_sums = project_grant_sum(grants)
     lr_matches = calc_lr_matches(grants)
     clr = constrain_by_budget(lr_matches, budget)
 
-    return grants, recipient_grant_sums, clr
+    return grants, lr_matches, clr
