@@ -1,6 +1,6 @@
 {
     "name": "chicago-ethereum-qf-contracts",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "Solidity code for the Chicago Ethereum Meetup's quadratic funding / CLR pilot",
     "main": "index.ts",
     "scripts": {
@@ -12,7 +12,7 @@
         "lint:solhint": "npx buidler check",
         "lint": "npm run lint:prettier && npm run lint:solhint",
         "deploy:rinkeby": "npx buidler run --network rinkeby scripts/deploy.ts",
-        "verify:rinkeby": "npx buidler verify-contract --contract-name Contributions --address 0x11528D3E35C9C8Fe59358c390f088Cf4b66e4C9e"
+        "verify:rinkeby": "npx buidler verify-contract --contract-name EthChicagoQF --address 0x11528D3E35C9C8Fe59358c390f088Cf4b66e4C9e"
     },
     "repository": {
         "type": "git",
