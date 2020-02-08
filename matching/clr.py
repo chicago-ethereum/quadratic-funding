@@ -15,10 +15,10 @@ from eth_utils import is_hex, to_hex
 '''
 def check_addresses(backers):
     result = []
-    for f in backers:
-        if not is_hex(f):
-            to_hex(f)
-        result.append(f)
+    for backer in backers:
+        if not is_hex(backer):
+            to_hex(backer)
+        result.append(backer)
     return result
 
 '''
