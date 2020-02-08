@@ -66,7 +66,7 @@ describe("CEMToken contract", () => {
         const adminBalance = await cemTokenContract.balanceOf(adminAddress);
         expect(adminBalance).to.equal(initialSupply);
 
-        // Give the backer account some tokens to contribute to projects
+        // Give the backer account some tokens to transfer
         const backerInitialAmount = 20;
         await cemTokenContract.transfer(backerAddress, backerInitialAmount);
         const backerBalance = await cemTokenContract.balanceOf(backerAddress);

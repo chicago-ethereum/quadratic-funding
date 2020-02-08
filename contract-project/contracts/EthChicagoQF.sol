@@ -68,15 +68,15 @@ contract EthChicagoQF is Ownable {
 
     // TODO: Remove backer as arg and just use msg.sender
 
-    function contribute(
-        address backer,
-        string memory projectNickname,
-        uint256 amount
-    ) public returns (bool) {
+    function contribute(string memory projectNickname, uint256 amount)
+        public
+        returns (bool)
+    {
         console.log("contribute called in Solidity");
         require(amount > 0, "Contribution amount must be greater than 0");
         address project = getProjectAddress(projectNickname);
         require(_approvedProjects[project] == true, "Project must be approved");
+        address backer = msg.sender;
         _backerAddresses[project].push(backer);
         _contributionAmounts[project].push(amount);
         // Transfer the token as an internal tx if ERC20 approved
