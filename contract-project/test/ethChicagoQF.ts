@@ -103,9 +103,7 @@ describe("EthChicagoQF contract", () => {
         console.log(`Added project ${projectAddress}`);
 
         // Reading public data, backer doesn't matter because it isn't a tx
-        let backerAddresses = await ethChicagoQFContract.listContributors(
-            nickname
-        );
+        let backerAddresses = await ethChicagoQFContract.listBackers(nickname);
         expect(backerAddresses.length).to.eq(0);
 
         // Sender approves contract
@@ -133,7 +131,7 @@ describe("EthChicagoQF contract", () => {
             `${backerAddress} contributed ${amount} tokens to ${nickname}`
         );
 
-        backerAddresses = await ethChicagoQFContract.listContributors(nickname);
+        backerAddresses = await ethChicagoQFContract.listBackers(nickname);
         console.log({backerAddresses});
         const contributedAmounts = await ethChicagoQFContract.listAmounts(
             nickname
@@ -152,7 +150,7 @@ describe("EthChicagoQF contract", () => {
         );
 
         const firstIndex = 0;
-        const firstBackerAddress = await ethChicagoQFContract.getContributorAtIndex(
+        const firstBackerAddress = await ethChicagoQFContract.getBackerAtIndex(
             nickname,
             firstIndex
         );

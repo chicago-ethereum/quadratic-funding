@@ -97,12 +97,12 @@ contract EthChicagoQF is Ownable {
 
     // Single-value getters
 
-    function getContributorAtIndex(string memory nickname, uint256 index)
+    function getBackerAtIndex(string memory nickname, uint256 index)
         public
         view
         returns (address backerAddress)
     {
-        address[] memory backerAddresses = listContributors(nickname);
+        address[] memory backerAddresses = listBackers(nickname);
         return backerAddresses[index];
     }
 
@@ -117,7 +117,7 @@ contract EthChicagoQF is Ownable {
 
     // List getters
 
-    function listContributors(string memory nickname)
+    function listBackers(string memory nickname)
         public
         view
         returns (address[] memory backerAddresses)

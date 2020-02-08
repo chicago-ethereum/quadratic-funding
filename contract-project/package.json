@@ -1,6 +1,6 @@
 {
     "name": "chicago-ethereum-qf-contracts",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "Solidity code for the Chicago Ethereum Meetup's quadratic funding / CLR pilot",
     "main": "index.ts",
     "scripts": {
