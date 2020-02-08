@@ -66,13 +66,16 @@ contract EthChicagoQF is Ownable {
     // TODO: Set up a way for a user to approve transfers of the
     // tokens using this contract
 
-    function contribute(address backer, string memory nickname, uint256 amount)
-        public
-        returns (bool)
-    {
+    // TODO: Remove backer as arg and just use msg.sender
+
+    function contribute(
+        address backer,
+        string memory projectNickname,
+        uint256 amount
+    ) public returns (bool) {
         console.log("contribute called in Solidity");
         require(amount > 0, "Contribution amount must be greater than 0");
-        address project = getProjectAddress(nickname);
+        address project = getProjectAddress(projectNickname);
         require(_approvedProjects[project] == true, "Project must be approved");
         _backerAddresses[project].push(backer);
         _contributionAmounts[project].push(amount);
@@ -86,52 +89,52 @@ contract EthChicagoQF is Ownable {
      * contract for a given project
      * @return uint256 representing the total amount of tokens
      */
-    function getContributionCount(string memory nickname)
+    function getContributionCount(string memory projectNickname)
         public
         view
         returns (uint256)
     {
-        address project = getProjectAddress(nickname);
+        address project = getProjectAddress(projectNickname);
         return _contributionAmounts[project].length;
     }
 
     // Single-value getters
 
-    function getBackerAtIndex(string memory nickname, uint256 index)
+    function getBackerAtIndex(string memory projectNickname, uint256 index)
         public
         view
         returns (address backerAddress)
     {
-        address[] memory backerAddresses = listBackers(nickname);
+        address[] memory backerAddresses = listBackers(projectNickname);
         return backerAddresses[index];
     }
 
-    function getAmountAtIndex(string memory nickname, uint256 index)
+    function getAmountAtIndex(string memory projectNickname, uint256 index)
         public
         view
         returns (uint256 contributionAmount)
     {
-        uint256[] memory contributionAmounts = listAmounts(nickname);
+        uint256[] memory contributionAmounts = listAmounts(projectNickname);
         return contributionAmounts[index];
     }
 
     // List getters
 
-    function listBackers(string memory nickname)
+    function listBackers(string memory projectNickname)
         public
         view
         returns (address[] memory backerAddresses)
     {
-        address project = getProjectAddress(nickname);
+        address project = getProjectAddress(projectNickname);
         return _backerAddresses[project];
     }
 
-    function listAmounts(string memory nickname)
+    function listAmounts(string memory projectNickname)
         public
         view
         returns (uint256[] memory contributionAmounts)
     {
-        address project = getProjectAddress(nickname);
+        address project = getProjectAddress(projectNickname);
         return _contributionAmounts[project];
     }
 
