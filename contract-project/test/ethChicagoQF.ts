@@ -115,11 +115,7 @@ describe("EthChicagoQF contract", () => {
         console.log({contractAllowance});
         // expect(allowance).to.equal(amount);
 
-        await ethChicagoQFContractAsBacker.contribute(
-            backerAddress,
-            nickname,
-            amount
-        );
+        await ethChicagoQFContractAsBacker.contribute(nickname, amount);
 
         const projectBalance = await cemTokenContract.balanceOf(projectAddress);
         console.log({projectBalance});
