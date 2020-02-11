@@ -93,63 +93,6 @@
         "constant": false,
         "inputs": [
             {
-                "internalType": "string",
-                "name": "projectNickname",
-                "type": "string"
-            },
-            {
-                "internalType": "uint256",
-                "name": "amount",
-                "type": "uint256"
-            }
-        ],
-        "name": "contributeDAI",
-        "outputs": [
-            {
-                "internalType": "bool",
-                "name": "",
-                "type": "bool"
-            }
-        ],
-        "payable": false,
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "constant": false,
-        "inputs": [
-            {
-                "internalType": "address",
-                "name": "backer",
-                "type": "address"
-            },
-            {
-                "internalType": "string",
-                "name": "projectNickname",
-                "type": "string"
-            },
-            {
-                "internalType": "uint256",
-                "name": "amount",
-                "type": "uint256"
-            }
-        ],
-        "name": "contributeDAIFrom",
-        "outputs": [
-            {
-                "internalType": "bool",
-                "name": "",
-                "type": "bool"
-            }
-        ],
-        "payable": false,
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "constant": false,
-        "inputs": [
-            {
                 "internalType": "address",
                 "name": "backer",
                 "type": "address"
@@ -448,22 +391,7 @@
                 "type": "address"
             }
         ],
-        "name": "setTokenCustom",
-        "outputs": [],
-        "payable": false,
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "constant": false,
-        "inputs": [
-            {
-                "internalType": "contract IERC20",
-                "name": "token",
-                "type": "address"
-            }
-        ],
-        "name": "setTokenDAI",
+        "name": "setToken",
         "outputs": [],
         "payable": false,
         "stateMutability": "nonpayable",
@@ -472,22 +400,7 @@
     {
         "constant": true,
         "inputs": [],
-        "name": "tokenCustom",
-        "outputs": [
-            {
-                "internalType": "contract IERC20",
-                "name": "",
-                "type": "address"
-            }
-        ],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "constant": true,
-        "inputs": [],
-        "name": "tokenDAI",
+        "name": "token",
         "outputs": [
             {
                 "internalType": "contract IERC20",
