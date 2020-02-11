@@ -21,7 +21,7 @@ Tue Feb 11 2020 6pm CST - ~ Tue Feb 18 2020 6pm CST (not exact: using block numb
 
 1. Getting initial funds for voting
 
-   [HackMD link](https://hackmd.io/zAkvlWeSTu6xVOSvlwyBTg/edit) where we'll collect our Ethereum addresses (not private keys!) for the Linkdrop.
+   `// TODO: Add Typeform link` where we'll collect our Ethereum addresses (not private keys!) for the Linkdrop as well as `instructions for sharing your address via Keybase`.
 
    `// TODO: Add Linkdrop link so people can look into what Linkdrop is`
 
