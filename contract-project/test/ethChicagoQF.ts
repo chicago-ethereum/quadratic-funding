@@ -17,7 +17,9 @@ describe("EthChicagoQF contract", () => {
         adminWalletObject,
         projectWalletObject,
         backerWalletObject,
-        approvedWalletObject
+        approvedWalletObject,
+        projectWalletTwoObject,
+        projectWalletThreeObject
     ] = provider.getWallets();
 
     const {address: adminAddress} = adminWalletObject;
@@ -36,7 +38,7 @@ describe("EthChicagoQF contract", () => {
     let cemTokenContractAsBacker: CEMToken;
 
     // TODO: Use an address type rather than the more generic string
-    let contributionsAddress: string;
+    let ethChicagoQFContractAddress: string;
 
     beforeEach(async () => {
         ethChicagoQFContract = (await deployContract(
@@ -44,8 +46,8 @@ describe("EthChicagoQF contract", () => {
             ContributionsArtifact
         )) as EthChicagoQF;
 
-        contributionsAddress = ethChicagoQFContract.address;
-        console.log({contributionsAddress});
+        ethChicagoQFContractAddress = ethChicagoQFContract.address;
+        console.log({ethChicagoQFContractAddress});
 
         // Get a reference to the EthChicagoQF contract where the backer is
         // always a "meetup attendee"
@@ -53,7 +55,7 @@ describe("EthChicagoQF contract", () => {
             backerWalletObject
         );
 
-        const initialSupply = 100;
+        const initialSupply = "1000000000000000000";
 
         // Note: Initially the backer of the deploy tx has all of the initial supply
         cemTokenContract = (await deployContract(
@@ -82,79 +84,202 @@ describe("EthChicagoQF contract", () => {
         await ethChicagoQFContract.setToken(cemTokenContractAddress);
 
         // Give the backer account some tokens to contribute to projects
-        const backerInitialAmount = 20;
+        const backerInitialAmount = "20000000000000000";
         await cemTokenContract.transfer(backerAddress, backerInitialAmount);
         const backerBalance = await cemTokenContract.balanceOf(backerAddress);
         expect(backerBalance).to.equal(backerInitialAmount);
         console.log({backerBalance});
     });
 
-    // Note: Real unit tests should be smaller than this
-    // and the shared parts should move into a beforeEach hook
-    // Just wrote this literally as quickly as possible
-    it("should be able to back a project", async () => {
-        const amount = 10;
-        let currentNumberOfContributions = 0;
+    it("list projects", async () => {
+        const multipleNicknames = [
+            "project-one",
+            "project-two",
+            "project-three"
+        ];
 
-        const nickname = "project-one";
+        const {address: projectTwoAddress} = projectWalletTwoObject;
+        const {address: projectThreeAddress} = projectWalletThreeObject;
 
-        // As admin
-        await ethChicagoQFContract.addProject(projectAddress, nickname);
-        console.log(`Added project ${projectAddress}`);
+        const multipleProjectAddresses = [
+            projectAddress,
+            projectTwoAddress,
+            projectThreeAddress
+        ];
 
-        // Reading public data, backer doesn't matter because it isn't a tx
-        let backerAddresses = await ethChicagoQFContract.listBackers(nickname);
-        expect(backerAddresses.length).to.eq(0);
+        const numProjects = multipleNicknames.length;
 
-        // Sender approves contract
-        await cemTokenContractAsBacker.approve(contributionsAddress, amount);
-        const contractAllowance = await cemTokenContract.allowance(
-            backerAddress,
-            contributionsAddress
-        );
-        console.log({contractAllowance});
-        // expect(allowance).to.equal(amount);
+        let currentProjectNickname;
+        let currentProjectAddress;
 
-        await ethChicagoQFContractAsBacker.contribute(nickname, amount);
+        for (let index = 0; index++; index < numProjects) {
+            currentProjectNickname = multipleNicknames[index];
+            currentProjectAddress = multipleProjectAddresses[index];
+            // As admin
+            await ethChicagoQFContract.addProject(
+                currentProjectAddress,
+                currentProjectNickname
+            );
+            console.log(
+                `Added project ${currentProjectAddress} with nickname ${currentProjectNickname}`
+            );
+        }
+        const projectNicknameFromContract = await ethChicagoQFContract.listProjects();
+        console.log({projectNicknameFromContract});
 
-        const projectBalance = await cemTokenContract.balanceOf(projectAddress);
-        console.log({projectBalance});
-        expect(projectBalance).to.equal(amount);
+        const projectCount = await ethChicagoQFContract.getProjectCount();
 
-        currentNumberOfContributions += 1;
+        expect(projectNicknameFromContract.length).to.eq(numProjects);
+        expect(projectCount).to.eq(numProjects);
 
-        console.log(
-            `${backerAddress} contributed ${amount} tokens to ${nickname}`
-        );
-
-        backerAddresses = await ethChicagoQFContract.listBackers(nickname);
-        console.log({backerAddresses});
-        const contributedAmounts = await ethChicagoQFContract.listAmounts(
-            nickname
-        );
-        console.log({contributedAmounts});
-
-        const contributionCount = await ethChicagoQFContract.getContributionCount(
-            nickname
-        );
-
-        expect(backerAddresses.length).to.eq(currentNumberOfContributions);
-        expect(contributedAmounts.length).to.eq(currentNumberOfContributions);
-        expect(contributionCount).to.eq(currentNumberOfContributions);
-        console.log(
-            `${currentNumberOfContributions} contributions as expected`
-        );
+        console.log(`${projectCount} projects as expected`);
 
         const firstIndex = 0;
-        const firstBackerAddress = await ethChicagoQFContract.getBackerAtIndex(
-            nickname,
+        const firstProjectNickname = await ethChicagoQFContract.getProjectAtIndex(
             firstIndex
         );
-        expect(firstBackerAddress).to.eq(backerAddress);
-        const firstContributedAmount = await ethChicagoQFContract.getAmountAtIndex(
-            nickname,
-            firstIndex
-        );
-        expect(firstContributedAmount).to.eq(amount);
+        expect(firstProjectNickname).to.eq(multipleNicknames[0]);
+    });
+
+    describe("back a project", () => {
+        let nickname: string = "";
+        let backerAddresses;
+
+        beforeEach(async () => {
+            nickname = "project-one";
+
+            // As admin
+            await ethChicagoQFContract.addProject(projectAddress, nickname);
+            console.log(`Added project ${projectAddress}`);
+
+            // Reading public data, backer doesn't matter because it isn't a tx
+            let backerAddresses = await ethChicagoQFContract.listBackers(
+                nickname
+            );
+            expect(backerAddresses.length).to.eq(0);
+        });
+
+        it("arrays handling internal accounting should behave properly", async () => {
+            const amount = 10;
+            let currentNumberOfContributions = 0;
+
+            // Sender approves contract
+            await cemTokenContractAsBacker.approve(
+                ethChicagoQFContractAddress,
+                amount
+            );
+
+            await ethChicagoQFContractAsBacker.contribute(nickname, amount);
+
+            currentNumberOfContributions += 1;
+
+            console.log(
+                `${backerAddress} contributed ${amount} tokens to ${nickname}`
+            );
+
+            backerAddresses = await ethChicagoQFContract.listBackers(nickname);
+            console.log({backerAddresses});
+
+            const contributedAmounts = await ethChicagoQFContract.listAmounts(
+                nickname
+            );
+            console.log({contributedAmounts});
+
+            const contributionCount = await ethChicagoQFContract.getContributionCount(
+                nickname
+            );
+
+            expect(backerAddresses.length).to.eq(currentNumberOfContributions);
+            expect(contributedAmounts.length).to.eq(
+                currentNumberOfContributions
+            );
+            expect(contributionCount).to.eq(currentNumberOfContributions);
+
+            console.log(
+                `${currentNumberOfContributions} contributions as expected`
+            );
+
+            const firstIndex = 0;
+            const firstBackerAddress = await ethChicagoQFContract.getBackerAtIndex(
+                nickname,
+                firstIndex
+            );
+            expect(firstBackerAddress).to.eq(backerAddress);
+            const firstContributedAmount = await ethChicagoQFContract.getAmountAtIndex(
+                nickname,
+                firstIndex
+            );
+            expect(firstContributedAmount).to.eq(amount);
+        });
+
+        it("should be able to back a project", async () => {
+            const amount = 10;
+            let currentNumberOfContributions = 0;
+
+            // Sender approves contract
+            await cemTokenContractAsBacker.approve(
+                ethChicagoQFContractAddress,
+                amount
+            );
+            const contractAllowance = await cemTokenContract.allowance(
+                backerAddress,
+                ethChicagoQFContractAddress
+            );
+            console.log({contractAllowance});
+            expect(contractAllowance).to.equal(amount);
+
+            await ethChicagoQFContractAsBacker.contribute(nickname, amount);
+
+            const projectBalance = await cemTokenContract.balanceOf(
+                projectAddress
+            );
+            console.log({projectBalance});
+            expect(projectBalance).to.equal(amount);
+
+            currentNumberOfContributions += 1;
+
+            console.log(
+                `${backerAddress} contributed ${amount} tokens to ${nickname}`
+            );
+        });
+
+        it("should be able to back a project with a large amount", async () => {
+            const largeAmount = "1000000000000000";
+            let currentNumberOfContributions = 0;
+
+            // Sender approves contract
+            await cemTokenContractAsBacker.approve(
+                ethChicagoQFContractAddress,
+                largeAmount
+            );
+            const contractAllowance = await cemTokenContract.allowance(
+                backerAddress,
+                ethChicagoQFContractAddress
+            );
+            console.log({contractAllowance});
+            expect(contractAllowance).to.equal(largeAmount);
+
+            await ethChicagoQFContractAsBacker.contribute(
+                nickname,
+                largeAmount
+            );
+
+            const projectBalance = await cemTokenContract.balanceOf(
+                projectAddress
+            );
+            console.log({projectBalance});
+            expect(projectBalance).to.equal(largeAmount);
+
+            console.log(
+                `${backerAddress} contributed ${largeAmount} tokens to ${nickname}`
+            );
+
+            const firstIndex = 0;
+            const firstContributedAmount = await ethChicagoQFContract.getAmountAtIndex(
+                nickname,
+                firstIndex
+            );
+            expect(firstContributedAmount).to.eq(largeAmount);
+        });
     });
 });
