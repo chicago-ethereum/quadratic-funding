@@ -81,7 +81,7 @@ describe("EthChicagoQF contract", () => {
         expect(adminBalance).to.equal(initialSupply);
 
         // Pick the token that will be tracked for QF/CLR purposes
-        await ethChicagoQFContract.setToken(cemTokenContractAddress);
+        await ethChicagoQFContract.setTokenCustom(cemTokenContractAddress);
 
         // Give the backer account some tokens to contribute to projects
         const backerInitialAmount = "20000000000000000";
@@ -112,9 +112,11 @@ describe("EthChicagoQF contract", () => {
         let currentProjectNickname;
         let currentProjectAddress;
 
-        for (let index = 0; index++; index < numProjects) {
+        for (let index = 0; index < numProjects; index++) {
             currentProjectNickname = multipleNicknames[index];
             currentProjectAddress = multipleProjectAddresses[index];
+            // console.log({currentProjectNickname});
+            // console.log({currentProjectAddress});
             // As admin
             await ethChicagoQFContract.addProject(
                 currentProjectAddress,
@@ -124,7 +126,7 @@ describe("EthChicagoQF contract", () => {
                 `Added project ${currentProjectAddress} with nickname ${currentProjectNickname}`
             );
         }
-        const projectNicknameFromContract = await ethChicagoQFContract.listProjects();
+        const projectNicknameFromContract = await ethChicagoQFContract.listProjectAddresses();
         console.log({projectNicknameFromContract});
 
         const projectCount = await ethChicagoQFContract.getProjectCount();
@@ -135,7 +137,7 @@ describe("EthChicagoQF contract", () => {
         console.log(`${projectCount} projects as expected`);
 
         const firstIndex = 0;
-        const firstProjectNickname = await ethChicagoQFContract.getProjectAtIndex(
+        const firstProjectNickname = await ethChicagoQFContract.getProjectNicknameAtIndex(
             firstIndex
         );
         expect(firstProjectNickname).to.eq(multipleNicknames[0]);

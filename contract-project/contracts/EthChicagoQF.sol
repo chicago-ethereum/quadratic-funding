@@ -9,12 +9,16 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/SafeERC20.sol";
 import "@openzeppelin/contracts/math/SafeMath.sol";
 
+
 contract EthChicagoQF is Ownable {
     using SafeMath for uint256;
     using SafeERC20 for IERC20;
 
-    // ERC20 basic token contract being held
-    IERC20 private _token;
+    // ERC20 basic custom token contract being held
+    IERC20 private _tokenCustom;
+
+    // ERC20 DAI token contract being held
+    IERC20 private _tokenDAI;
 
     mapping(address => address[]) private _backerAddresses;
     mapping(address => uint256[]) private _contributionAmounts;
@@ -43,15 +47,26 @@ contract EthChicagoQF is Ownable {
 
     event NewContribution(address backer, address project, uint256 amount);
 
-    function setToken(IERC20 token) public onlyOwner {
-        _token = token;
+    function setTokenCustom(IERC20 token) public onlyOwner {
+        _tokenCustom = token;
+    }
+
+    function setTokenDAI(IERC20 token) public onlyOwner {
+        _tokenDAI = token;
     }
 
     /**
-     * @return the token used for this contract
+     * @return the custom token used for this contract
      */
-    function token() public view returns (IERC20) {
-        return _token;
+    function tokenCustom() public view returns (IERC20) {
+        return _tokenCustom;
+    }
+
+    /**
+     * @return the DAI token used for this contract
+     */
+    function tokenDAI() public view returns (IERC20) {
+        return _tokenDAI;
     }
 
     function getProjectAddress(string memory nickname)
@@ -127,11 +142,19 @@ contract EthChicagoQF is Ownable {
         return contributeFrom(msg.sender, projectNickname, amount);
     }
 
-    function contributeFrom(
+    function contributeDAI(string memory projectNickname, uint256 amount)
+        public
+        returns (bool)
+    {
+        console.log("contribute called in Solidity");
+        return contributeDAIFrom(msg.sender, projectNickname, amount);
+    }
+
+    function _validateAndStoreData(
         address backer,
         string memory projectNickname,
         uint256 amount
-    ) public returns (bool) {
+    ) internal returns (address projectAddress) {
         require(amount > 0, "Contribution amount must be greater than 0");
         address project = getProjectAddress(projectNickname);
         require(_approvedProjects[project] == true, "Project must be approved");
@@ -139,9 +162,39 @@ contract EthChicagoQF is Ownable {
         // allowance or insufficient balance case here
         _backerAddresses[project].push(backer);
         _contributionAmounts[project].push(amount);
-        // Transfer the token as an internal tx if ERC20 approved
-        _deliverTokens(backer, project, amount);
         emit NewContribution(backer, project, amount);
+        return project;
+    }
+
+    function contributeFrom(
+        address backer,
+        string memory projectNickname,
+        uint256 amount
+    ) public returns (bool) {
+        address project = _validateAndStoreData(
+            backer,
+            projectNickname,
+            amount
+        );
+        // Transfer the custom token as an internal tx if ERC20 approved
+        // true = using a custom token
+        _deliverTokens(backer, project, amount, true);
+        return true;
+    }
+
+    function contributeDAIFrom(
+        address backer,
+        string memory projectNickname,
+        uint256 amount
+    ) public returns (bool) {
+        address project = _validateAndStoreData(
+            backer,
+            projectNickname,
+            amount
+        );
+        // Transfer the custom token as an internal tx if ERC20 approved
+        // false = not using a custom token = using DAI
+        _deliverTokens(backer, project, amount, false);
         return true;
     }
 
@@ -227,10 +280,14 @@ contract EthChicagoQF is Ownable {
     function _deliverTokens(
         address backer,
         address project,
-        uint256 tokenAmount
+        uint256 tokenAmount,
+        bool useCustomToken
     ) internal {
-        // TODO: Potentially move back to safeTransferFrom at some point
-        // token().safeTransferFrom(backer, project, tokenAmount);
-        token().transferFrom(backer, project, tokenAmount);
+        if (useCustomToken) {
+            // TODO: Potentially move back to safeTransferFrom at some point
+            tokenCustom().transferFrom(backer, project, tokenAmount);
+        } else {
+            tokenDAI().transferFrom(backer, project, tokenAmount);
+        }
     }
 }
