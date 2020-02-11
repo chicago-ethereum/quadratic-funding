@@ -9,6 +9,7 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/SafeERC20.sol";
 import "@openzeppelin/contracts/math/SafeMath.sol";
 
+
 contract EthChicagoQF is Ownable {
     using SafeMath for uint256;
     using SafeERC20 for IERC20;

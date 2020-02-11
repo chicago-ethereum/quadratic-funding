@@ -1,21 +1,46 @@
 import {ethers} from "@nomiclabs/buidler";
 
 async function main() {
-    const factory = await ethers.getContract("EthChicagoQF");
+    const cemTokenFactory = await ethers.getContract("CEMToken");
 
-    // If we had constructor arguments, they would be passed into deploy()
-    let contract = await factory.deploy();
+    // 10 ^ 18 = 1000000000000000000
+    // 1000 * 10 ^ 18 = 1000000000000000000000
+    // 1000 * 10 ^ 18 as a string "1000000000000000000000"
+    let cemTokenContract = await cemTokenFactory.deploy(
+        "1000000000000000000000"
+    );
+
+    const {address: cemTokenContractAddress} = cemTokenContract;
 
     // The address the Contract WILL have once mined
-    console.log(`contract address is ${contract.address}`);
+    console.log(`cemTokenContract address is ${cemTokenContractAddress}`);
 
     // The transaction that was sent to the network to deploy the Contract
     console.log(
-        `contract.deployTransaction.hash is ${contract.deployTransaction.hash}`
+        `cemTokenContract.deployTransaction.hash is ${cemTokenContract.deployTransaction.hash}`
     );
 
     // The contract is NOT deployed yet; we must wait until it is mined
-    await contract.deployed();
+    await cemTokenContract.deployed();
+
+    const ethChicagoQFFactory = await ethers.getContract("EthChicagoQF");
+    let ethChicagoQFContract = await ethChicagoQFFactory.deploy();
+
+    // The address the Contract WILL have once mined
+    console.log(
+        `ethChicagoQFContract address is ${ethChicagoQFContract.address}`
+    );
+
+    // The transaction that was sent to the network to deploy the Contract
+    console.log(
+        `ethChicagoQFContract.deployTransaction.hash is ${ethChicagoQFContract.deployTransaction.hash}`
+    );
+
+    // The contract is NOT deployed yet; we must wait until it is mined
+    await ethChicagoQFContract.deployed();
+
+    // Set the first token to be the contract we just deployed
+    await ethChicagoQFContract.setToken(cemTokenContractAddress);
 }
 
 async function wrapper() {
