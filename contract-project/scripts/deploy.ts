@@ -39,8 +39,13 @@ async function main() {
     // The contract is NOT deployed yet; we must wait until it is mined
     await ethChicagoQFContract.deployed();
 
-    // Set the first token to be the contract we just deployed
-    await ethChicagoQFContract.setToken(cemTokenContractAddress);
+    // Set the token to be the contract we just deployed
+    await ethChicagoQFContract.setTokenCustom(cemTokenContractAddress);
+
+    // Set the DAI token to be the DAI address (using mainnet address)
+    // So not useful in Rinkeby
+    const daiAddress = "0x6b175474e89094c44da98b954eedeac495271d0f";
+    await ethChicagoQFContract.setTokenDAI(daiAddress);
 }
 
 async function wrapper() {
