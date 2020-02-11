@@ -14,11 +14,8 @@ contract EthChicagoQF is Ownable {
     using SafeMath for uint256;
     using SafeERC20 for IERC20;
 
-    // ERC20 basic custom token contract being held
-    IERC20 private _tokenCustom;
-
-    // ERC20 DAI token contract being held
-    IERC20 private _tokenDAI;
+    // ERC20 token being used
+    IERC20 private _token;
 
     mapping(address => address[]) private _backerAddresses;
     mapping(address => uint256[]) private _contributionAmounts;
@@ -47,26 +44,15 @@ contract EthChicagoQF is Ownable {
 
     event NewContribution(address backer, address project, uint256 amount);
 
-    function setTokenCustom(IERC20 token) public onlyOwner {
-        _tokenCustom = token;
-    }
-
-    function setTokenDAI(IERC20 token) public onlyOwner {
-        _tokenDAI = token;
+    function setToken(IERC20 token) public onlyOwner {
+        _token = token;
     }
 
     /**
-     * @return the custom token used for this contract
+     * @return the token used for this contract
      */
-    function tokenCustom() public view returns (IERC20) {
-        return _tokenCustom;
-    }
-
-    /**
-     * @return the DAI token used for this contract
-     */
-    function tokenDAI() public view returns (IERC20) {
-        return _tokenDAI;
+    function token() public view returns (IERC20) {
+        return _token;
     }
 
     function getProjectAddress(string memory nickname)
@@ -142,14 +128,6 @@ contract EthChicagoQF is Ownable {
         return contributeFrom(msg.sender, projectNickname, amount);
     }
 
-    function contributeDAI(string memory projectNickname, uint256 amount)
-        public
-        returns (bool)
-    {
-        console.log("contribute called in Solidity");
-        return contributeDAIFrom(msg.sender, projectNickname, amount);
-    }
-
     function _validateAndStoreData(
         address backer,
         string memory projectNickname,
@@ -176,25 +154,8 @@ contract EthChicagoQF is Ownable {
             projectNickname,
             amount
         );
-        // Transfer the custom token as an internal tx if ERC20 approved
-        // true = using a custom token
-        _deliverTokens(backer, project, amount, true);
-        return true;
-    }
-
-    function contributeDAIFrom(
-        address backer,
-        string memory projectNickname,
-        uint256 amount
-    ) public returns (bool) {
-        address project = _validateAndStoreData(
-            backer,
-            projectNickname,
-            amount
-        );
-        // Transfer the custom token as an internal tx if ERC20 approved
-        // false = not using a custom token = using DAI
-        _deliverTokens(backer, project, amount, false);
+        // Transfer the token as an internal tx if ERC20 approved
+        _deliverTokens(backer, project, amount);
         return true;
     }
 
@@ -280,14 +241,9 @@ contract EthChicagoQF is Ownable {
     function _deliverTokens(
         address backer,
         address project,
-        uint256 tokenAmount,
-        bool useCustomToken
+        uint256 tokenAmount
     ) internal {
-        if (useCustomToken) {
-            // TODO: Potentially move back to safeTransferFrom at some point
-            tokenCustom().transferFrom(backer, project, tokenAmount);
-        } else {
-            tokenDAI().transferFrom(backer, project, tokenAmount);
-        }
+        // TODO: Potentially move back to safeTransferFrom at some point
+        token().transferFrom(backer, project, tokenAmount);
     }
 }

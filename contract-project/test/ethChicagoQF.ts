@@ -81,7 +81,7 @@ describe("EthChicagoQF contract", () => {
         expect(adminBalance).to.equal(initialSupply);
 
         // Pick the token that will be tracked for QF/CLR purposes
-        await ethChicagoQFContract.setTokenCustom(cemTokenContractAddress);
+        await ethChicagoQFContract.setToken(cemTokenContractAddress);
 
         // Give the backer account some tokens to contribute to projects
         const backerInitialAmount = "20000000000000000";

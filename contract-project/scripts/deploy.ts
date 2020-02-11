@@ -1,27 +1,27 @@
 import {ethers} from "@nomiclabs/buidler";
 
 async function main() {
-    const cemTokenFactory = await ethers.getContract("CEMToken");
+    // const cemTokenFactory = await ethers.getContract("CEMToken");
 
-    // 10 ^ 18 = 1000000000000000000
-    // 1000 * 10 ^ 18 = 1000000000000000000000
-    // 1000 * 10 ^ 18 as a string "1000000000000000000000"
-    let cemTokenContract = await cemTokenFactory.deploy(
-        "1000000000000000000000"
-    );
+    // // 10 ^ 18 = 1000000000000000000
+    // // 1000 * 10 ^ 18 = 1000000000000000000000
+    // // 1000 * 10 ^ 18 as a string "1000000000000000000000"
+    // let cemTokenContract = await cemTokenFactory.deploy(
+    //     "1000000000000000000000"
+    // );
 
-    const {address: cemTokenContractAddress} = cemTokenContract;
+    // const {address: cemTokenContractAddress} = cemTokenContract;
 
-    // The address the Contract WILL have once mined
-    console.log(`cemTokenContract address is ${cemTokenContractAddress}`);
+    // // The address the Contract WILL have once mined
+    // console.log(`cemTokenContract address is ${cemTokenContractAddress}`);
 
-    // The transaction that was sent to the network to deploy the Contract
-    console.log(
-        `cemTokenContract.deployTransaction.hash is ${cemTokenContract.deployTransaction.hash}`
-    );
+    // // The transaction that was sent to the network to deploy the Contract
+    // console.log(
+    //     `cemTokenContract.deployTransaction.hash is ${cemTokenContract.deployTransaction.hash}`
+    // );
 
-    // The contract is NOT deployed yet; we must wait until it is mined
-    await cemTokenContract.deployed();
+    // // The contract is NOT deployed yet; we must wait until it is mined
+    // await cemTokenContract.deployed();
 
     const ethChicagoQFFactory = await ethers.getContract("EthChicagoQF");
     let ethChicagoQFContract = await ethChicagoQFFactory.deploy();
@@ -39,13 +39,12 @@ async function main() {
     // The contract is NOT deployed yet; we must wait until it is mined
     await ethChicagoQFContract.deployed();
 
-    // Set the token to be the contract we just deployed
-    await ethChicagoQFContract.setTokenCustom(cemTokenContractAddress);
-
     // Set the DAI token to be the DAI address (using mainnet address)
     // So not useful in Rinkeby
     const daiAddress = "0x6b175474e89094c44da98b954eedeac495271d0f";
-    await ethChicagoQFContract.setTokenDAI(daiAddress);
+
+    // Set the token to be the contract we just deployed
+    await ethChicagoQFContract.setToken(daiAddress);
 }
 
 async function wrapper() {
