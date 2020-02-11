@@ -34,7 +34,7 @@ describe("CEMToken contract", () => {
     let cemTokenContractAsApprovedSpender: CEMToken;
 
     // TODO: Use an address type rather than the more generic string
-    let contributionsAddress: string;
+    let ethChicagoQFContractAddress: string;
 
     beforeEach(async () => {
         const initialSupply = 100;
