@@ -10,12 +10,36 @@
 
 Tue Feb 11 2020 6pm CST - ~ Tue Feb 18 2020 6pm CST (not exact: using block number and average block time)
 
-#### Eligible projects
+## Eligible projects
 
-`// TODO: Add this list`
+| Project nickname | Multisig address |
+| ------------- | ------------- |
+| noloss_lotto | [`0x5c5D70a1AF09F1246fA20E4E118e842c1c6893E7`](https://gnosis-safe.io/safes/0x5c5D70a1AF09F1246fA20E4E118e842c1c6893E7/balances) |
+| humanity_dao  | [`0x0ce9229c0efde424ece564c3cc4edd96fade2b07`](https://gnosis-safe.io/safes/0x0ce9229c0efde424ece564c3cc4edd96fade2b07/balances) |
+| pizza  | [`0x059686e72f1e970da96e335f02e49da3933fa0f6`](https://gnosis-safe.io/safes/0x059686e72f1e970da96e335f02e49da3933fa0f6/balances) |
+| unisocks  | [`0x76224d2799A12021829fdB6164a04D0c5475aB77`](https://gnosis-safe.io/safes/0x76224d2799A12021829fdB6164a04D0c5475aB77/balances) |
+| bonding_curve  | [`0x675c86f06c923ce025ed90d57324915a0f8e7f5a`](https://gnosis-safe.io/safes/0x675c86f06c923ce025ed90d57324915a0f8e7f5a/balances) |
+| coffee_coin  | [`0x5268b5f777C3e058650926861041Bb3BeD219252`](https://gnosis-safe.io/safes/0x5268b5f777C3e058650926861041Bb3BeD219252/balances) |
+| coffee_forward | [`0xf17009e4d3660896A0Ca57Ea45E94937759846c9`](https://gnosis-safe.io/safes/0xf17009e4d3660896A0Ca57Ea45E94937759846c9/balances) |
+| budgeting_dao | [`0x85284271b7538681bcce162272bf1227f1015811`](https://gnosis-safe.io/safes/0x85284271b7538681bcce162272bf1227f1015811/balances) |
 
-- Pizza
-- ...
+## Project descriptions
+
+### noloss_lotto
+
+### humanity_dao
+
+### pizza
+
+### unisocks
+
+### bonding_curve
+
+### coffee_coin
+
+### coffee_forward
+
+### budgeting_dao
 
 #### Steps
 
