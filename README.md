@@ -31,7 +31,7 @@ A Chicago Ethereum version of [PoolTogether](https://www.pooltogether.com).
 
 ### humanity_dao
 
-A Chicago Ethereum version of the [Humanity DAO](www.humanitydao.org) registry of verified humans. This registry could be used for a number of things, such as an anti-Sybil whitelist for future Chicago Ethereum funding rounds, governance decisions, or even just games!
+A Chicago Ethereum version of the [Humanity DAO](https://www.humanitydao.org) registry of verified humans. This registry could be used for a number of things, such as an anti-Sybil whitelist for future Chicago Ethereum funding rounds, governance decisions, or even just games!
 
 ### pizza
 
@@ -39,7 +39,7 @@ Funds for food and drinks at Chicago Ethereum meetups. Could help attract more p
 
 ### unisocks
 
-A Chicago Ethereum version of [Unisocks](unisocks.exchange), a fun experiment selling phsyical socks via a token on Uniswap. Exact item of clothing TBD &mdash; could be a shirt, socks, a beanie, etc.
+A Chicago Ethereum version of [Unisocks](https://unisocks.exchange), a fun experiment selling phsyical socks via a token on Uniswap. Exact item of clothing TBD &mdash; could be a shirt, socks, a beanie, etc.
 
 ### bonding_curve
 
