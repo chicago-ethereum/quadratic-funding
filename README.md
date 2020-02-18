@@ -10,7 +10,7 @@
 
 Tue Feb 11 2020 6pm CST - ~ Tue Feb 18 2020 6pm CST (not exact: using block number and average block time)
 
-## Eligible projects
+## Eligible projects <a name="project_nicknames"></a>
 
 | Project nickname | Multisig address |
 | ------------- | ------------- |
@@ -27,19 +27,35 @@ Tue Feb 11 2020 6pm CST - ~ Tue Feb 18 2020 6pm CST (not exact: using block numb
 
 ### noloss_lotto
 
+A Chicago Ethereum version of [PoolTogether](https://www.pooltogether.com).
+
 ### humanity_dao
+
+A Chicago Ethereum version of the [Humanity DAO](www.humanitydao.org) registry of verified humans. This registry could be used for a number of things, such as an anti-Sybil whitelist for future Chicago Ethereum funding rounds, governance decisions, or even just games!
 
 ### pizza
 
+Funds for food and drinks at Chicago Ethereum meetups. Could help attract more people to Ethereum!
+
 ### unisocks
+
+A Chicago Ethereum version of [Unisocks](unisocks.exchange), a fun experiment selling phsyical socks via a token on Uniswap. Exact item of clothing TBD &mdash; could be a shirt, socks, a beanie, etc.
 
 ### bonding_curve
 
+Funds to seed the reserve currency in a bonding curve that mints (and buys back) Chicago Ethereum tokens. These tokens could be used for a number of things within the Chicago Ethereum ecosystem, such as governance voting, swag purchases, and lots of things we've yet to dream up.
+
 ### coffee_coin
+
+A protocol for tokenizing small favors (e.g. buying somebody a coffee), creating a "favor economy".
 
 ### coffee_forward
 
+A dapp that makes it easy for people to pay for coffee (or tea!) for somebody else in line behind them, and perhaps to be recognized for their generosity.
+
 ### budgeting_dao
+
+A dapp that facilitates group budget allocation and manages spending permissions.
 
 #### Steps
 
@@ -61,15 +77,15 @@ Tue Feb 11 2020 6pm CST - ~ Tue Feb 18 2020 6pm CST (not exact: using block numb
 
    This is the contract address you need to approve: [`0xaD4a34A7854138d6A8A0254F793AC3510090e9e5`](https://etherscan.io/address/0xad4a34a7854138d6a8a0254f793ac3510090e9e5)
    
-   Use duckduckgo.com to write `10^18` or `10**18` and have the number appear not in scientific notation (like it does in Google). Because DAI has 18 decimal places, this the equivalent of 1 DAI. So to use 10 DAI, that's `10 * 10^18 = 10^19`
+   <a name="duckduckgo"></a> Use duckduckgo.com to write `10^18` or `10**18` and have the number appear not in scientific notation (like it does in Google). Because DAI has 18 decimal places, this the equivalent of 1 DAI. So to use 10 DAI, that's `10 * 10^18 = 10^19`
 
 1. _Optional but a good practice:_ Take a look at [the contracts](./contract-project) to confirm that they do what we say they do.
 
 1. Contribute to a project
 
-   Use the `contribute` function in the write tab (after approving our contract to spend DAI!)
+   Use the `contribute` function in the write tab (after approving our contract to spend DAI!). You'll need to type in the name of the project you're contributing to (see [project nicknames](#project_nicknames) above) as well as the amount you want to contribute.
    
-   Use the same duckduckgo.com method described above for converting the amount of DAI you want to contribute (e.g. 3 DAI) to the proper number (e.g. `3 * 10^18`)
+   Use the same [duckduckgo.com method](#duckduckgo) described above for converting the amount of DAI you want to contribute (e.g. 3 DAI) to the proper number (e.g. `3 * 10^18`)
 
    [https://oneclickdapp.com/miranda-pancake/](https://oneclickdapp.com/miranda-pancake/)
 
