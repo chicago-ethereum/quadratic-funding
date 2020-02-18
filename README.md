@@ -61,7 +61,7 @@ A dapp that makes it easy for people to pay for coffee (or tea!) for somebody el
 
 A dapp that facilitates group budget allocation and manages spending permissions.
 
-#### Steps
+## Steps to contribute
 
 1. Getting initial funds for voting
 
