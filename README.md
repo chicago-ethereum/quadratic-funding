@@ -12,7 +12,7 @@ This project implements a CLR system to fund public goods for the [Chicago Ether
 
 #### Date range
 
-Tue Feb 11 2020 6pm CST - ~ Tue Feb 18 2020 6pm CST (not exact: using block number and average block time)
+Tue Feb 11 2020 6pm CST - ~ Tue Feb 25 2020 6pm CST
 
 ## Eligible projects <a name="project_nicknames"></a>
 
