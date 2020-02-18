@@ -69,7 +69,7 @@ Tue Feb 11 2020 6pm CST - ~ Tue Feb 18 2020 6pm CST (not exact: using block numb
 
    Use the `contribute` function in the write tab (after approving our contract to spend DAI!)
    
-   Use the same method described above for converting the amount of DAI you want to contribute (e.g. 3 DAI) to the proper number (e.g. `3 * 10^18`)
+   Use the same duckduckgo.com method described above for converting the amount of DAI you want to contribute (e.g. 3 DAI) to the proper number (e.g. `3 * 10^18`)
 
    [https://oneclickdapp.com/miranda-pancake/](https://oneclickdapp.com/miranda-pancake/)
 
