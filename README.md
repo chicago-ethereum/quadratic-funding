@@ -1,6 +1,12 @@
-# Chicago Ethereum Meetup QF / CLR pilot
+# Chicago Ethereum Meetup QF / CLR Pilot
 
 ## Background
+
+[Quadratic Funding](https://en.wikipedia.org/wiki/Quadratic_voting#Quadratic_funding) (QF) is a conceptual approach for funding public goods without relying on (or ceding control to) a central party to make allocation decisions. Put simply, individuals make contributions to the projects they care about, and those contributions are matched by shared funds such that smaller contributions are matched proportionally higher than large contributions. Projects that receive many small contributions, for example, will therefore end up with a greater total amount received than projects that receive a few several large contributions. 
+
+[Constrained Liberal Radicalism](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3243656) (CLR) is a practical approach to QF that sets an explicit budget for the matching funds.
+
+This project implements a CLR system to fund public goods for the [Chicago Ethereum](https://www.meetup.com/Chicago-Ethereum-Meetup) ecosystem and meetup group.
 
 `// TODO: Add info about quadratic funding and constrained liberal radicalism`
 
