@@ -6,9 +6,7 @@
 
 [Constrained Liberal Radicalism](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3243656) (CLR) is a practical approach to QF that sets an explicit budget for the matching funds.
 
-This project implements a CLR system to fund public goods for the [Chicago Ethereum](https://www.meetup.com/Chicago-Ethereum-Meetup) ecosystem and meetup group.
-
-`// TODO: Add info about quadratic funding and constrained liberal radicalism`
+This project implements a CLR system to fund public goods for the [Chicago Ethereum](https://www.meetup.com/Chicago-Ethereum-Meetup) community and meetup group.
 
 ## Instructions for participating
 
