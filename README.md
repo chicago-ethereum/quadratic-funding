@@ -65,9 +65,7 @@ A dapp that facilitates group budget allocation and manages spending permissions
 
 1. Getting initial funds for voting
 
-   `// TODO: Add Typeform link` where we'll collect our Ethereum addresses (not private keys!) for the Linkdrop as well as `instructions for sharing your address via Keybase`.
-
-   `// TODO: Add Linkdrop link so people can look into what Linkdrop is`
+Send one of the Chicago Ethereum Meetup organizers your Ethereum addresses (not private keys!) on Telegram, Twitter, Discord, Keybase, etc. in order to receive tokens.
 
 1. _Optional:_ Using additional funds
 
@@ -79,7 +77,7 @@ A dapp that facilitates group budget allocation and manages spending permissions
    
    Alternatively, here is a `oneclickdapp` for the DAI contract: [oneclickdapp.com/marvin-elvis/](https://oneclickdapp.com/marvin-elvis/)
 
-   This is the contract address you need to approve: [`0xaD4a34A7854138d6A8A0254F793AC3510090e9e5`](https://etherscan.io/address/0xad4a34a7854138d6a8a0254f793ac3510090e9e5)
+   This is the contract address you need to approve: `0xaD4a34A7854138d6A8A0254F793AC3510090e9e5` [Etherscan link](https://etherscan.io/address/0xad4a34a7854138d6a8a0254f793ac3510090e9e5)
    
    <a name="duckduckgo"></a> Use duckduckgo.com to write `10^18` or `10**18` and have the number appear not in scientific notation (like it does in Google). Because DAI has 18 decimal places, this the equivalent of 1 DAI. So to use 10 DAI, that's `10 * 10^18 = 10^19`
 
@@ -91,7 +89,9 @@ A dapp that facilitates group budget allocation and manages spending permissions
    
    Use the same [duckduckgo.com method](#duckduckgo) described above for converting the amount of DAI you want to contribute (e.g. 3 DAI) to the proper number (e.g. `3 * 10^18`)
 
-   [https://oneclickdapp.com/miranda-pancake/](https://oneclickdapp.com/miranda-pancake/)
+   **Okay, that's all the info you need. Here is the link for the dapp!**
+   
+   [oneclickdapp.com/miranda-pancake/](https://oneclickdapp.com/miranda-pancake/)
 
 ## Code
 
