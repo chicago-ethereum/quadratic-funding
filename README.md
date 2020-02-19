@@ -89,7 +89,9 @@ Send one of the Chicago Ethereum Meetup organizers your Ethereum addresses (not 
    
    Use the same [duckduckgo.com method](#duckduckgo) described above for converting the amount of DAI you want to contribute (e.g. 3 DAI) to the proper number (e.g. `3 * 10^18`)
 
-   [https://oneclickdapp.com/miranda-pancake/](https://oneclickdapp.com/miranda-pancake/)
+   **Okay, that's all the info you need. Here is the link for the dapp!**
+   
+   [oneclickdapp.com/miranda-pancake/](https://oneclickdapp.com/miranda-pancake/)
 
 ## Code
 
