@@ -43,7 +43,7 @@ Funds for food and drinks at Chicago Ethereum meetups. Could help attract more p
 
 ### unisocks
 
-A Chicago Ethereum version of [Unisocks](https://unisocks.exchange), a fun experiment selling phsyical socks via a token on Uniswap. Exact item of clothing TBD &mdash; could be a shirt, socks, a beanie, etc.
+A Chicago Ethereum version of [Unisocks](https://unisocks.exchange), a fun experiment selling physical socks via a token on Uniswap. Exact item of clothing TBD &mdash; could be a shirt, socks, a beanie, etc.
 
 ### bonding_curve
 
