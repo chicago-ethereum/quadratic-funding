@@ -80,6 +80,12 @@ Send one of the Chicago Ethereum Meetup organizers your Ethereum addresses (not 
    This is the contract address you need to approve: `0xaD4a34A7854138d6A8A0254F793AC3510090e9e5`
    
    <a name="duckduckgo"></a> Use duckduckgo.com to write `10^19` or `10**19` and have the number appear not in scientific notation (like it does in Google). Because DAI has 18 decimal places, this the equivalent of 10 DAI.
+   
+| DAI amount | String to use when picking amount for smart contracts |
+| ------------- | ------------- |
+| 10 DAI | 10000000000000000000 |
+| 3 DAI  | 3000000000000000000 |
+| 1 DAI  | 1000000000000000000 |
 
 1. _Optional but a good practice:_ Take a look at [the contracts](./contract-project) to confirm that they do what we say they do.  [Etherscan link for our contract](https://etherscan.io/address/0xad4a34a7854138d6a8a0254f793ac3510090e9e5)
 
