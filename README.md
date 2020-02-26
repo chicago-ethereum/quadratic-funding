@@ -79,7 +79,7 @@ A dapp that facilitates group budget allocation and manages spending permissions
 
    This is the contract address you need to approve: `0xaD4a34A7854138d6A8A0254F793AC3510090e9e5`
    
-   | DAI amount | String to use when picking amount for smart contracts |
+   | DAI amount | Example values to enter when picking DAI amount for smart contracts |
    | ------------- | ------------- |
    | 10 DAI | 10000000000000000000 |
    | 3 DAI  | 3000000000000000000 |
@@ -93,7 +93,7 @@ A dapp that facilitates group budget allocation and manages spending permissions
 
    Use the `contribute` function in the write tab (after approving our contract to spend DAI!). You'll need to type in the name of the project you're contributing to (see [project nicknames](#project_nicknames) above) as well as the amount you want to contribute.
    
-   | DAI amount | String to use when picking amount for smart contracts |
+   | DAI amount | Example values to enter when picking DAI amount for smart contracts |
    | ------------- | ------------- |
    | 10 DAI | 10000000000000000000 |
    | 3 DAI  | 3000000000000000000 |
