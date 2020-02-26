@@ -113,7 +113,6 @@ See [`contract-project`](./contract-project) dir for the smart contracts
 
 See [`matching`](./matching) dir for the QF / CLR calculation code
 
-### Inspecting use of funds
 ## Project multisig wallet addresses
 
 | Project nickname | Multisig address |
