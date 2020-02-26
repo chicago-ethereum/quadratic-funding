@@ -65,7 +65,7 @@ A dapp that facilitates group budget allocation and manages spending permissions
 
 1. Getting initial funds for voting
 
-Send one of the Chicago Ethereum Meetup organizers your Ethereum addresses (not private keys!) on Telegram, Twitter, Discord, Keybase, etc. in order to receive tokens.
+   Send one of the Chicago Ethereum Meetup organizers your Ethereum addresses (not private keys!) on Telegram, Twitter, Discord, Keybase, etc. in order to receive tokens.
 
 1. _Optional:_ Using additional funds
 
