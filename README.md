@@ -12,20 +12,20 @@ This project implements a CLR system to fund public goods for the [Chicago Ether
 
 #### Date range
 
-Tue Feb 11 2020 6pm CST - ~ Tue Feb 25 2020 6pm CST
+Tue Feb 11 2020 6pm CST - Tue Feb 25 2020 11:59pm CST
 
 ## Eligible projects <a name="project_nicknames"></a>
 
-| Project nickname | Multisig address |
-| ------------- | ------------- |
-| noloss_lotto | [`0x5c5D70a1AF09F1246fA20E4E118e842c1c6893E7`](https://gnosis-safe.io/safes/0x5c5D70a1AF09F1246fA20E4E118e842c1c6893E7/balances) |
-| humanity_dao  | [`0x0ce9229c0efde424ece564c3cc4edd96fade2b07`](https://gnosis-safe.io/safes/0x0ce9229c0efde424ece564c3cc4edd96fade2b07/balances) |
-| pizza  | [`0x059686e72f1e970da96e335f02e49da3933fa0f6`](https://gnosis-safe.io/safes/0x059686e72f1e970da96e335f02e49da3933fa0f6/balances) |
-| unisocks  | [`0x76224d2799A12021829fdB6164a04D0c5475aB77`](https://gnosis-safe.io/safes/0x76224d2799A12021829fdB6164a04D0c5475aB77/balances) |
-| bonding_curve  | [`0x675c86f06c923ce025ed90d57324915a0f8e7f5a`](https://gnosis-safe.io/safes/0x675c86f06c923ce025ed90d57324915a0f8e7f5a/balances) |
-| coffee_coin  | [`0x5268b5f777C3e058650926861041Bb3BeD219252`](https://gnosis-safe.io/safes/0x5268b5f777C3e058650926861041Bb3BeD219252/balances) |
-| coffee_forward | [`0xf17009e4d3660896A0Ca57Ea45E94937759846c9`](https://gnosis-safe.io/safes/0xf17009e4d3660896A0Ca57Ea45E94937759846c9/balances) |
-| budgeting_dao | [`0x85284271b7538681bcce162272bf1227f1015811`](https://gnosis-safe.io/safes/0x85284271b7538681bcce162272bf1227f1015811/balances) |
+| Project nickname |
+| ------------- |
+| noloss_lotto |
+| humanity_dao  |
+| pizza  |
+| unisocks  |
+| bonding_curve  |
+| coffee_coin  |
+| coffee_forward |
+| budgeting_dao |
 
 ## Project descriptions
 
@@ -77,11 +77,17 @@ Send one of the Chicago Ethereum Meetup organizers your Ethereum addresses (not 
    
    Alternatively, here is a `oneclickdapp` for the DAI contract: [oneclickdapp.com/marvin-elvis/](https://oneclickdapp.com/marvin-elvis/)
 
-   This is the contract address you need to approve: `0xaD4a34A7854138d6A8A0254F793AC3510090e9e5` [Etherscan link](https://etherscan.io/address/0xad4a34a7854138d6a8a0254f793ac3510090e9e5)
+   This is the contract address you need to approve: `0xaD4a34A7854138d6A8A0254F793AC3510090e9e5`
    
-   <a name="duckduckgo"></a> Use duckduckgo.com to write `10^18` or `10**18` and have the number appear not in scientific notation (like it does in Google). Because DAI has 18 decimal places, this the equivalent of 1 DAI. So to use 10 DAI, that's `10 * 10^18 = 10^19`
+   <a name="duckduckgo"></a> Use duckduckgo.com to write `10^19` or `10**19` and have the number appear not in scientific notation (like it does in Google). Because DAI has 18 decimal places, this the equivalent of 10 DAI.
+   
+   | DAI amount | String to use when picking amount for smart contracts |
+   | ------------- | ------------- |
+   | 10 DAI | 10000000000000000000 |
+   | 3 DAI  | 3000000000000000000 |
+   | 1 DAI  | 1000000000000000000 |
 
-1. _Optional but a good practice:_ Take a look at [the contracts](./contract-project) to confirm that they do what we say they do.
+1. _Optional but a good practice:_ Take a look at [the contracts](./contract-project) to confirm that they do what we say they do.  [Etherscan link for our contract](https://etherscan.io/address/0xad4a34a7854138d6a8a0254f793ac3510090e9e5)
 
 1. Contribute to a project
 
@@ -102,6 +108,20 @@ See [`contract-project`](./contract-project) dir for the smart contracts
 ### QF / CLR calculations and visualization
 
 See [`matching`](./matching) dir for the QF / CLR calculation code
+
+### Inspecting use of funds
+## Project multisig wallet addresses
+
+| Project nickname | Multisig address |
+| ------------- | ------------- |
+| noloss_lotto | [`0x5c5D70a1AF09F1246fA20E4E118e842c1c6893E7`](https://gnosis-safe.io/safes/0x5c5D70a1AF09F1246fA20E4E118e842c1c6893E7/balances) |
+| humanity_dao  | [`0x0ce9229c0efde424ece564c3cc4edd96fade2b07`](https://gnosis-safe.io/safes/0x0ce9229c0efde424ece564c3cc4edd96fade2b07/balances) |
+| pizza  | [`0x059686e72f1e970da96e335f02e49da3933fa0f6`](https://gnosis-safe.io/safes/0x059686e72f1e970da96e335f02e49da3933fa0f6/balances) |
+| unisocks  | [`0x76224d2799A12021829fdB6164a04D0c5475aB77`](https://gnosis-safe.io/safes/0x76224d2799A12021829fdB6164a04D0c5475aB77/balances) |
+| bonding_curve  | [`0x675c86f06c923ce025ed90d57324915a0f8e7f5a`](https://gnosis-safe.io/safes/0x675c86f06c923ce025ed90d57324915a0f8e7f5a/balances) |
+| coffee_coin  | [`0x5268b5f777C3e058650926861041Bb3BeD219252`](https://gnosis-safe.io/safes/0x5268b5f777C3e058650926861041Bb3BeD219252/balances) |
+| coffee_forward | [`0xf17009e4d3660896A0Ca57Ea45E94937759846c9`](https://gnosis-safe.io/safes/0xf17009e4d3660896A0Ca57Ea45E94937759846c9/balances) |
+| budgeting_dao | [`0x85284271b7538681bcce162272bf1227f1015811`](https://gnosis-safe.io/safes/0x85284271b7538681bcce162272bf1227f1015811/balances) |
 
 ## Instructions to set up your own fork of this project
 
