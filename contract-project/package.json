@@ -42,7 +42,7 @@
         "@nomiclabs/buidler-etherscan": "^1.1.2",
         "@nomiclabs/buidler-solhint": "^1.1.2",
         "@nomiclabs/buidler-waffle": "^1.1.2",
-        "@openzeppelin/contracts": "^2.5.0",
+        "@openzeppelin/contracts": "^4.4.2",
         "@types/chai": "^4.2.8",
         "@types/mocha": "^7.0.1",
         "@types/node": "^13.7.0",
