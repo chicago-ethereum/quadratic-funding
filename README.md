@@ -117,14 +117,14 @@ See [`matching`](./matching) dir for the QF / CLR calculation code
 
 | Project nickname | Multisig address |
 | ------------- | ------------- |
-| noloss_lotto | [`0x5c5D70a1AF09F1246fA20E4E118e842c1c6893E7`](https://gnosis-safe.io/app/#/safes/0x5c5D70a1AF09F1246fA20E4E118e842c1c6893E7/balances) |
-| humanity_dao  | [`0x0ce9229c0efde424ece564c3cc4edd96fade2b07`](https://gnosis-safe.io/app/#/safes/0x0ce9229c0efde424ece564c3cc4edd96fade2b07/balances) |
-| pizza  | [`0x059686e72f1e970da96e335f02e49da3933fa0f6`](https://gnosis-safe.io/app/#/safes/0x059686e72f1e970da96e335f02e49da3933fa0f6/balances) |
-| unisocks  | [`0x76224d2799A12021829fdB6164a04D0c5475aB77`](https://gnosis-safe.io/app/#/safes/0x76224d2799A12021829fdB6164a04D0c5475aB77/balances) |
-| bonding_curve  | [`0x675c86f06c923ce025ed90d57324915a0f8e7f5a`](https://gnosis-safe.io/app/#/safes/0x675c86f06c923ce025ed90d57324915a0f8e7f5a/balances) |
-| coffee_coin  | [`0x5268b5f777C3e058650926861041Bb3BeD219252`](https://gnosis-safe.io/app/#/safes/0x5268b5f777C3e058650926861041Bb3BeD219252/balances) |
-| coffee_forward | [`0xf17009e4d3660896A0Ca57Ea45E94937759846c9`](https://gnosis-safe.io/app/#/safes/0xf17009e4d3660896A0Ca57Ea45E94937759846c9/balances) |
-| budgeting_dao | [`0x85284271b7538681bcce162272bf1227f1015811`](https://gnosis-safe.io/app/#/safes/0x85284271b7538681bcce162272bf1227f1015811/balances) |
+| noloss_lotto | [`0x5c5D70a1AF09F1246fA20E4E118e842c1c6893E7`](https://app.safe.global/balances?safe=eth:0x5c5D70a1AF09F1246fA20E4E118e842c1c6893E7) |
+| humanity_dao  | [`0x0ce9229c0efde424ece564c3cc4edd96fade2b07`](https://app.safe.global/balances?safe=eth:0x0ce9229c0efde424ece564c3cc4edd96fade2b07) |
+| pizza  | [`0x059686e72f1e970da96e335f02e49da3933fa0f6`](https://app.safe.global/balances?safe=eth:0x059686e72f1e970da96e335f02e49da3933fa0f6) |
+| unisocks  | [`0x76224d2799A12021829fdB6164a04D0c5475aB77`](https://app.safe.global/balances?safe=eth:0x76224d2799A12021829fdB6164a04D0c5475aB77) |
+| bonding_curve  | [`0x675c86f06c923ce025ed90d57324915a0f8e7f5a`](https://app.safe.global/balances?safe=eth:0x675c86f06c923ce025ed90d57324915a0f8e7f5a) |
+| coffee_coin  | [`0x5268b5f777C3e058650926861041Bb3BeD219252`](https://app.safe.global/balances?safe=eth:0x5268b5f777C3e058650926861041Bb3BeD219252) |
+| coffee_forward | [`0xf17009e4d3660896A0Ca57Ea45E94937759846c9`](https://app.safe.global/balances?safe=eth:0xf17009e4d3660896A0Ca57Ea45E94937759846c9) |
+| budgeting_dao | [`0x85284271b7538681bcce162272bf1227f1015811`](https://app.safe.global/balances?safe=eth:0x85284271b7538681bcce162272bf1227f1015811) |
 
 ## Instructions to set up your own fork of this project
 
